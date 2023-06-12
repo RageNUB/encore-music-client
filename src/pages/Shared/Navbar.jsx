@@ -1,10 +1,24 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../assets/logo.svg"
+import logo from "../../assets/logo.svg";
 import useAuth from "../../hooks/useAuth";
 import { FaUserCircle } from "react-icons/fa";
+import { DarkModeToggle } from "react-dark-mode-toggle-2";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
-  const {user, logOut} = useAuth();
+  const { user, logOut } = useAuth();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [theme, setTheme] = useState('winter');
+  console.log(isDarkMode)
+
+  useEffect(() => {
+    document.querySelector('html').setAttribute('data-theme', theme);
+    if(isDarkMode){
+      setTheme("night")
+    } else {
+      setTheme("winter")
+    }
+  }, [theme, isDarkMode]);
 
   const handleLogOut = () => {
     logOut()
@@ -78,56 +92,67 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl"><img className="h-12" src={logo} alt="" /></a>
+        <a className="btn btn-ghost normal-case text-xl">
+          <img className="h-12" src={logo} alt="" />
+        </a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-        <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="/"
-              >
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="/instructors"
-              >
-                Instructors
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="/classes"
-              >
-                Classes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="/dashboard"
-              >
-                Dashboard
-              </NavLink>
-            </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "active font-bold text-white" : ""
+              }
+              to="/"
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "active font-bold text-white" : ""
+              }
+              to="/instructors"
+            >
+              Instructors
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "active font-bold text-white" : ""
+              }
+              to="/classes"
+            >
+              Classes
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "active font-bold text-white" : ""
+              }
+              to="/dashboard"
+            >
+              Dashboard
+            </NavLink>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">
+        <div className="mr-4">
+        <DarkModeToggle
+          onChange={setIsDarkMode}
+          isDarkMode={isDarkMode}
+        ></DarkModeToggle>
+        </div>
         <div className="dropdown  dropdown-bottom dropdown-end">
           {user && (
-            <div tabIndex={0} className=" mr-3 border-2 rounded-full border-teal-200">
+            <div
+              tabIndex={0}
+              className=" mr-3 border-2 rounded-full border-teal-200"
+            >
               {user.photoURL ? (
                 <img
                   className="rounded-full w-10"
@@ -135,7 +160,9 @@ const Navbar = () => {
                   src={user?.photoURL}
                 />
               ) : (
-                <div><FaUserCircle className="text-4xl"></FaUserCircle></div>
+                <div>
+                  <FaUserCircle className="text-4xl"></FaUserCircle>
+                </div>
               )}
               <ul
                 tabIndex={0}
