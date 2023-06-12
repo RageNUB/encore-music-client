@@ -125,9 +125,9 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <div>
+        <div className="dropdown  dropdown-bottom dropdown-end">
           {user && (
-            <div className=" mr-3 dropdown dropdown-bottom dropdown-end border-2 rounded-full border-teal-200">
+            <div tabIndex={0} className=" mr-3 border-2 rounded-full border-teal-200">
               {user.photoURL ? (
                 <img
                   className="rounded-full w-10"
@@ -135,7 +135,7 @@ const Navbar = () => {
                   src={user?.photoURL}
                 />
               ) : (
-                <FaUserCircle className="text-4xl"></FaUserCircle>
+                <div><FaUserCircle className="text-4xl"></FaUserCircle></div>
               )}
               <ul
                 tabIndex={0}

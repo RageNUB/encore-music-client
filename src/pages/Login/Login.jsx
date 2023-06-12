@@ -39,10 +39,10 @@ const Login = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="hero-content flex-col lg:flex-row-reverse mt-8"
         >
-          <div className="text-center lg:text-left w-1/2">
+          <div className="text-center lg:text-left md:w-1/2">
             <img src={loginImg} alt="" />
           </div>
-          <div className="card flex-shrink-0 max-w-sm shadow-2xl bg-base-100 w-1/2">
+          <div className="card flex-shrink-0 max-w-sm shadow-2xl bg-base-100 md:w-1/2">
             <div className="card-body">
               <div className="form-control">
                 <label className="label">
@@ -82,7 +82,7 @@ const Login = () => {
               </div>
               <p>
               <small>
-                Already Have an Account?{" "}
+                New to Encore Music Academy{" "}
                 <Link to="/register" className="underline">
                   Please Register
                 </Link>
