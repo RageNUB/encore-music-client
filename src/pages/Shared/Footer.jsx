@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <div>
       <div>
-        <footer className="footer p-10 bg-base-200 gird grid-cols-1 lg:grid-cols-2 justify-center  text-base-content">
+        <footer className="footer p-10 bg-base-100 gird grid-cols-1 lg:grid-cols-2 justify-center  text-base-content">
           <div>
             <img
               className="w-32"
@@ -29,7 +29,7 @@ const Footer = () => {
         </footer>
       </div>
 
-      <div className="footer footer-center p-4 bg-base-200 border-t-2 border-gray-50 text-base-content">
+      <div className="footer footer-center p-4 bg-base-100 border-t-2 border-gray-50 text-base-content">
         <div>
           <p className="text-base font-semibold">
             Copyright © 2023 - All right reserved by Encore Music Academy

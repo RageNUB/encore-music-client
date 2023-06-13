@@ -10,6 +10,7 @@ const Register = () => {
   const {
     register,
     handleSubmit,
+    watch,
     reset,
     formState: { errors },
   } = useForm();
@@ -136,13 +137,16 @@ const Register = () => {
                   className="input input-bordered"
                   {...register("confirmPass", { 
                     required: true,
-                    
+                    validate: (value) => value === watch('password')
                  })}
                 />
-                {errors.confirmPass && (
+                {errors.confirmPass?.type === "required" && (
                   <span className="text-red-600">
                     Confirm Password is required
                   </span>
+                )}
+                {errors.confirmPass?.type === "validate" && (
+                  <span className="text-red-600">Password not matched</span>
                 )}
               </div>
               <div className="form-control mt-6">
