@@ -9,7 +9,6 @@ const Navbar = () => {
   const { user, logOut } = useAuth();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [theme, setTheme] = useState('winter');
-  console.log(isDarkMode)
 
   useEffect(() => {
     document.querySelector('html').setAttribute('data-theme', theme);
@@ -166,7 +165,7 @@ const Navbar = () => {
               )}
               <ul
                 tabIndex={0}
-                className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                className="dropdown-content z-10 menu p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
                   <p className="font-semibold text-lg text-primary">

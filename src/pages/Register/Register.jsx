@@ -3,7 +3,6 @@ import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import signupImg from "../../assets/undraw_sign_up_n6im.svg";
-import { useState } from "react";
 
 const Register = () => {
   const { createUser, googleSignIn, updateUserProfile } = useAuth();
@@ -14,19 +13,14 @@ const Register = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
-    if (data.password === data.confirmPass) {
-      createUser(data.email, data.password).then((result) => {
+    createUser(data.email, data.password).then((result) => {
         console.log(result);
       });
-    } else {
-        setError("Password Didn't Match")
-    }
   };
 
   const handleGoogleSignIn = () => {
