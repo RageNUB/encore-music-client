@@ -64,7 +64,7 @@ const Navbar = () => {
                 className={({ isActive }) =>
                   isActive ? "active font-bold text-white" : ""
                 }
-                to="/"
+                to="/instructors"
               >
                 Instructors
               </NavLink>
