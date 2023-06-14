@@ -1,8 +1,10 @@
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import signupImg from "../../assets/undraw_sign_up_n6im.svg";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createUser, googleSignIn, updateUserProfile } = useAuth();
@@ -10,24 +12,52 @@ const Register = () => {
     register,
     handleSubmit,
     watch,
-    reset,
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
-    createUser(data.email, data.password).then((result) => {
+    createUser(data.email, data.password)
+    .then((result) => {
         console.log(result);
+
+        updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          // const saveUser = {name: data.name, email: data.email, role: "student"}
+
+          axios.post("http://localhost:5000/users", {name: data.name, email: data.email, role: "student"})
+          .then(data => {
+              console.log(data.data.insertedId)
+              if(data.data.insertedId){
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Account created successfully',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                navigate("/");
+              }
+          })
+        })
       });
   };
 
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
-        console.log(result);
-        navigate(from);
+        const loggedUser = result.user;
+        axios.post("http://localhost:5000/users", {name: loggedUser.displayName, email: loggedUser.email, role: "student"})
+          .then(() => {
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Account created successfully',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+                navigate("/");
+          })
       })
       .catch((error) => {
         console.log(error);

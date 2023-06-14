@@ -3,24 +3,52 @@ import loginImg from "../../assets/undraw_login_re_4vu2.svg";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 const Login = () => {
     const {register, handleSubmit, reset, formState: { errors }} = useForm();
     const { signIn, googleSignIn } = useAuth();
+    const [error, setError] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+
     const onSubmit = (data) => {
-        signIn(data.email, data.password).then((result) => {
-        const loggedUser = result.user;
-        console.log(loggedUser);
-        });
+        signIn(data.email, data.password)
+        .then(() => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Welcome to Encore Music Academy',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          setError(false)
+          reset();
+          navigate(from, {replace: true} )
+        })
+        .catch(error => {
+          setError(true)
+          console.log(error)
+        })
     };
 
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
-        console.log(result);
+        const loggedUser = result.user;
+        axios.post("http://localhost:5000/users", {name: loggedUser.displayName, email: loggedUser.email, role: "student"})
+          .then(() => {
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Welcome to Encore Music Academy',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+          })
         navigate(from);
       })
       .catch((error) => {
@@ -71,6 +99,7 @@ const Login = () => {
                 {errors.password && (
                   <span className="text-red-600">Password is required</span>
                 )}
+                {error && <span className="text-red-600">Wrong Password</span>}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
