@@ -12,16 +12,16 @@ const PopularClasses = () => {
   console.log(isLoading, classes.slice(0, 6));
 
   return (
-    <div className="my-10">
+    <div className="my-12">
       <h1 className="text-4xl font-bold text-center uppercase">
         Explore the Most <span className="text-primary">Popular Classes</span>
       </h1>
-      <h3 className="text-lg font-medium text-center mt-3">Join our highly sought-after classes and unlock your musical potential</h3>
+      <h3 className="text-lg font-medium text-center mt-3 mb-3">Join our highly sought-after classes and unlock your musical potential</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
         {classes.slice(0, 6).map((classData) => (
           <div
             key={classData._id}
-            className="card card-compact w-96 bg-base-100 shadow-xl mt-5"
+            className="card card-compact w-96 bg-base-100 shadow-xl mb-8"
           >
             <figure>
               <img
