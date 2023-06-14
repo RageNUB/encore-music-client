@@ -1,14 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 
 const PopularInstructor = () => {
-  const { isLoading, data: instructors = [] } = useQuery({
+  const { data: instructors = [] } = useQuery({
     queryKey: ["instructors"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5000/instructors");
       return res.json();
     },
   });
-  console.log(isLoading, instructors.slice(0, 6));
 
   return (
     <div className="my-12">

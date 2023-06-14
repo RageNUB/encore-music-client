@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaBookReader, FaDollarSign, FaUserGraduate } from "react-icons/fa";
 
-const PopularClasses = () => {
+const AllClasses = () => {
   const { data: classes = [] } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
@@ -19,10 +19,14 @@ const PopularClasses = () => {
         Join our highly sought-after classes and unlock your musical potential
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
-        {classes.slice(0, 6).map((classData) => (
+        {classes.map((classData) => (
           <div
             key={classData._id}
-            className="card card-compact w-96 bg-base-100 shadow-xl mb-8"
+            className={`${
+              classData.total_seats - classData.total_enrolled_students
+                ? "bg-base-100"
+                : "bg-error text-base-100"
+            } card card-compact w-96 shadow-xl mb-8`}
           >
             <figure>
               <img
@@ -41,9 +45,9 @@ const PopularClasses = () => {
               </p>
               <p className="flex items-center gap-2 font-medium text-md">
                 <span className="flex items-center gap-2 font-bold">
-                  <FaBookReader></FaBookReader> Student Enrolled :
+                  <FaBookReader></FaBookReader> Available Seats :
                 </span>{" "}
-                {classData.total_enrolled_students}
+                {classData.total_seats - classData.total_enrolled_students}
               </p>
               <p className="flex items-center gap-2 font-medium text-md">
                 <span className="flex items-center gap-2 font-bold">
@@ -51,6 +55,7 @@ const PopularClasses = () => {
                 </span>{" "}
                 ${classData.price}
               </p>
+              <button className="btn btn-primary mt-5">Select</button>
             </div>
           </div>
         ))}
@@ -59,4 +64,4 @@ const PopularClasses = () => {
   );
 };
 
-export default PopularClasses;
+export default AllClasses;
