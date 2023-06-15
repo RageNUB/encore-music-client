@@ -1,19 +1,19 @@
-import logoFooter from "../../assets/logo.svg"
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import logoFooter from "../../assets/logo.svg";
 
 const Footer = () => {
-    return (
-        <div>
+  return (
+    <div>
       <div>
         <footer className="footer p-10 bg-base-100 gird grid-cols-1 lg:grid-cols-2 justify-center  text-base-content">
           <div>
-            <img
-              className="w-32"
-              src={logoFooter}
-              alt=""
-            />
+            <img className="w-32" src={logoFooter} alt="" />
             <p>
-              <span className="text-xl font-semibold">Encore Music Academy</span>
-              <br />Summer Musical School since 2010
+              <span className="text-xl font-semibold">
+                Encore Music Academy
+              </span>
+              <br />
+              Summer Musical School since 2010
             </p>
           </div>
           <div>
@@ -29,15 +29,39 @@ const Footer = () => {
         </footer>
       </div>
 
-      <div className="footer footer-center p-4 bg-base-100 border-t-2 border-gray-50 text-base-content">
-        <div>
-          <p className="text-base font-semibold">
-            Copyright © 2023 - All right reserved by Encore Music Academy
-          </p>
+      <footer className="footer items-center p-4 bg-base-100 border-t-2 border-gray-50 text-base-content">
+        <div className="items-center grid-flow-col">
+          <p>© 2023 Encore Music Academy - @Jubaidul Islam Rimon</p>
         </div>
-      </div>
+        <div className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+          <a
+            className="text-2xl"
+            href="https://www.facebook.com/jubaidul.islamrimon"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaFacebookF></FaFacebookF>
+          </a>
+          <a
+            className="text-2xl"
+            href="https://www.instagram.com/j_i_rimon/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaInstagram></FaInstagram>{" "}
+          </a>
+          <a
+            className="text-2xl"
+            href="https://www.linkedin.com/in/jirimon39/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedinIn></FaLinkedinIn>
+          </a>
+        </div>
+      </footer>
     </div>
-    );
+  );
 };
 
 export default Footer;

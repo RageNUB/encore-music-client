@@ -47,7 +47,7 @@ const Navbar = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 p-2 shadow z-10 bg-base-100 rounded-box w-52"
           >
             <li>
               <NavLink
@@ -79,7 +79,7 @@ const Navbar = () => {
                 Classes
               </NavLink>
             </li>
-            <li>
+            {user && <li>
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "active font-bold text-white" : ""
@@ -88,11 +88,11 @@ const Navbar = () => {
               >
                 Dashboard
               </NavLink>
-            </li>
+            </li>}
           </ul>
         </div>
         <a className="btn btn-ghost normal-case text-xl">
-          <img className="h-12" src={logo} alt="" />
+          <img className="h-8 lg:h-12" src={logo} alt="" />
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -127,7 +127,7 @@ const Navbar = () => {
               Classes
             </NavLink>
           </li>
-          <li>
+          {user && <li>
             <NavLink
               className={({ isActive }) =>
                 isActive ? "active font-bold text-white" : ""
@@ -136,7 +136,7 @@ const Navbar = () => {
             >
               Dashboard
             </NavLink>
-          </li>
+          </li>}
         </ul>
       </div>
       <div className="navbar-end">
