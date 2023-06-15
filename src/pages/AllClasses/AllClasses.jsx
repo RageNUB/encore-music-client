@@ -18,7 +18,7 @@ const AllClasses = () => {
       <h3 className="text-lg font-medium text-center mt-3 mb-3">
         Join our highly sought-after classes and unlock your musical potential
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 justify-items-center">
         {classes.map((classData) => (
           <div
             key={classData._id}

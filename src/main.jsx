@@ -11,7 +11,7 @@ import {
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <div className="max-w-7xl mx-auto">
+  <div >
     <AuthProvider>
       <QueryClientProvider client={queryClient}>
         <React.StrictMode>

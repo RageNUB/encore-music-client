@@ -8,9 +8,9 @@ import AllClasses from "../pages/AllClasses/AllClasses";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 import PrivateRoutes from "./PrivateRoutes";
 import EnrolledClasses from "../pages/Dashboard/EnrolledClasses/EnrolledClasses";
-import Dashboard from "../pages/Dashboard/Dashboard/Dashboard";
 import SelectedClasses from "../pages/Dashboard/SelectedClasses/SelectedClasses";
 import PaymentHistory from "../pages/Dashboard/PaymentHistory/PaymentHistory";
+import Dashboard from "../layouts/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
         children: [
             {
-                path: "/dashboard",
+                path: "home",
                 element: <PrivateRoutes><DashboardHome></DashboardHome></PrivateRoutes>
             },
             {

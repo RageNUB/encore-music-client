@@ -132,7 +132,7 @@ const Navbar = () => {
               className={({ isActive }) =>
                 isActive ? "active font-bold text-white" : ""
               }
-              to="/dashboard"
+              to="/dashboard/home"
             >
               Dashboard
             </NavLink>

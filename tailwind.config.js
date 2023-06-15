@@ -8,8 +8,8 @@ export default {
     themes: [
       "light",
       "dark",
-      "night",
       "winter",
+      "night",
     ],
   },
   plugins: [require("daisyui")],

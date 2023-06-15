@@ -18,7 +18,7 @@ const PopularInstructor = () => {
       <h3 className="text-lg font-medium text-center mt-3 mb-3">
         Learn from the best in the field and be inspired by their expertise
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-8 justify-items-center">
         {instructors.slice(0, 6).map((instructor) => (
           <div
             key={instructor._id}
