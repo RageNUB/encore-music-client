@@ -1,7 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaBookReader, FaDollarSign, FaUserGraduate } from "react-icons/fa";
+import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AllClasses = () => {
+  const { user } = useAuth();
+  const [axiosSecure] = useAxiosSecure();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const { data: classes = [] } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
@@ -9,6 +18,45 @@ const AllClasses = () => {
       return res.json();
     },
   });
+
+  const handleSelectClass = (classData) => {
+    console.log(classData);
+    if (user) {
+      const classItem = {
+        user_name: user.displayName,
+        user_email: user.email,
+        class_name: classData.class_name,
+        image: classData.image,
+        instructor_email: classData.instructor_email,
+        price: classData.price,
+        class_id: classData._id,
+      };
+      axiosSecure.post("classes", classItem).then((data) => {
+        if (data.data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Item Selected Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        title: "Please login to select the class",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login now!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login", { state: { from: location } });
+        }
+      });
+    }
+  };
 
   return (
     <div className="my-12">
@@ -55,7 +103,12 @@ const AllClasses = () => {
                 </span>{" "}
                 ${classData.price}
               </p>
-              <button className="btn btn-primary mt-5">Select</button>
+              <button
+                onClick={() => handleSelectClass(classData)}
+                className="btn btn-primary mt-5"
+              >
+                Select
+              </button>
             </div>
           </div>
         ))}

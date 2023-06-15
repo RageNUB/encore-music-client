@@ -20,6 +20,10 @@ const Dashboard = () => {
     }
   }, [theme, isDarkMode]);
 
+  const admin = false;
+  const instructor = false;
+  const student = true;
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -96,7 +100,7 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="text-base font-medium mt-4">
+          {student && <div className="text-base font-medium mt-4">
             <li>
               <NavLink
                 className={({ isActive }) =>
@@ -137,10 +141,74 @@ const Dashboard = () => {
                 Payment History
               </NavLink>
             </li>
-          </div>
+          </div>}
+          {instructor && <div className="text-base font-medium mt-4">
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active font-bold text-white" : ""
+                }
+                to="home"
+              >
+                Dashboard Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active font-bold text-white" : ""
+                }
+                to="addClass"
+              >
+                Add A Class
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active font-bold text-white" : ""
+                }
+                to="myClasses"
+              >
+                My Classes
+              </NavLink>
+            </li>
+          </div>}
+          {admin && <div className="text-base font-medium mt-4">
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active font-bold text-white" : ""
+                }
+                to="home"
+              >
+                Dashboard Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active font-bold text-white" : ""
+                }
+                to="manageClasses"
+              >
+                Manage Classes
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "active font-bold text-white" : ""
+                }
+                to="manageUsers"
+              >
+                Manage Users
+              </NavLink>
+            </li>
+          </div>}
           <div className="divider"></div>
           <div className="text-base font-medium">
-          <li>
+            <li>
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "active font-bold text-white" : ""
@@ -150,7 +218,7 @@ const Dashboard = () => {
                 Home
               </NavLink>
             </li>
-          <li>
+            <li>
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "active font-bold text-white" : ""
@@ -160,7 +228,7 @@ const Dashboard = () => {
                 Instructors
               </NavLink>
             </li>
-          <li>
+            <li>
               <NavLink
                 className={({ isActive }) =>
                   isActive ? "active font-bold text-white" : ""
