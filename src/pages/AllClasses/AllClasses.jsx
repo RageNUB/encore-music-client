@@ -28,6 +28,7 @@ const AllClasses = () => {
         class_name: classData.class_name,
         image: classData.image,
         instructor_email: classData.instructor_email,
+        instructor_name: classData.instructor_name,
         price: classData.price,
         class_id: classData._id,
       };

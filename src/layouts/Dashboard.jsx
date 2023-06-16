@@ -27,7 +27,7 @@ const Dashboard = () => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content  flex flex-col items-center justify-center">
+      <div className="drawer-content  flex flex-col items-center justify-start">
         {/* Page content here */}
         <div className="w-full navbar bg-base-100 justify-between">
           <div className="flex-none lg:hidden">
