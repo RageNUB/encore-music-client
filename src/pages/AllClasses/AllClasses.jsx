@@ -4,10 +4,12 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
+import useUsers from "../../hooks/useUsers";
 
 const AllClasses = () => {
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
+  const [userRole] = useUsers();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -107,6 +109,7 @@ const AllClasses = () => {
               <button
                 onClick={() => handleSelectClass(classData)}
                 className="btn btn-primary mt-5"
+                disabled={userRole !== "student"}
               >
                 Select
               </button>
