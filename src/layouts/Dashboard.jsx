@@ -5,11 +5,16 @@ import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import logo from "../assets/logo.svg";
 import logo2 from "../assets/logo-footer.svg";
+import useUsers from "../hooks/useUsers";
 
 const Dashboard = () => {
   const { user } = useAuth();
+  const [userRole] = useUsers()
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [theme, setTheme] = useState("winter");
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [isInstructor, setIsInstructor] = useState(false)
+  const [isStudent, setIsStudent] = useState(false)
 
   useEffect(() => {
     document.querySelector("html").setAttribute("data-theme", theme);
@@ -20,9 +25,21 @@ const Dashboard = () => {
     }
   }, [theme, isDarkMode]);
 
-  const admin = false;
-  const instructor = false;
-  const student = true;
+  useEffect(() => {
+    if(userRole === "admin"){
+        setIsAdmin(true)
+        setIsInstructor(false)
+        setIsStudent(false)
+      } else if(userRole === "instructor"){
+        setIsAdmin(false)
+        setIsInstructor(true)
+        setIsStudent(false)
+      } else if(userRole === "student"){
+        setIsAdmin(false)
+        setIsInstructor(false)
+        setIsStudent(true)
+      }
+  }, [userRole])
 
   return (
     <div className="drawer lg:drawer-open">
@@ -100,112 +117,118 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          {student && <div className="text-base font-medium mt-4">
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="home"
-              >
-                Dashboard Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="selectedClasses"
-              >
-                My Selected Classes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="enrolledClasses"
-              >
-                My Enrolled Classes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="paymentHistory"
-              >
-                Payment History
-              </NavLink>
-            </li>
-          </div>}
-          {instructor && <div className="text-base font-medium mt-4">
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="home"
-              >
-                Dashboard Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="addClass"
-              >
-                Add A Class
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="myClasses"
-              >
-                My Classes
-              </NavLink>
-            </li>
-          </div>}
-          {admin && <div className="text-base font-medium mt-4">
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="home"
-              >
-                Dashboard Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="manageClasses"
-              >
-                Manage Classes
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "active font-bold text-white" : ""
-                }
-                to="manageUsers"
-              >
-                Manage Users
-              </NavLink>
-            </li>
-          </div>}
+          {isStudent && (
+            <div className="text-base font-medium mt-4">
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active font-bold text-white" : ""
+                  }
+                  to="home"
+                >
+                  Dashboard Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active font-bold text-white" : ""
+                  }
+                  to="selectedClasses"
+                >
+                  My Selected Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active font-bold text-white" : ""
+                  }
+                  to="enrolledClasses"
+                >
+                  My Enrolled Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active font-bold text-white" : ""
+                  }
+                  to="paymentHistory"
+                >
+                  Payment History
+                </NavLink>
+              </li>
+            </div>
+          )}
+          {isInstructor && (
+            <div className="text-base font-medium mt-4">
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active font-bold text-white" : ""
+                  }
+                  to="home"
+                >
+                  Dashboard Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active font-bold text-white" : ""
+                  }
+                  to="addClass"
+                >
+                  Add A Class
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active font-bold text-white" : ""
+                  }
+                  to="myClasses"
+                >
+                  My Classes
+                </NavLink>
+              </li>
+            </div>
+          )}
+          {isAdmin && (
+            <div className="text-base font-medium mt-4">
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active font-bold text-white" : ""
+                  }
+                  to="home"
+                >
+                  Dashboard Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active font-bold text-white" : ""
+                  }
+                  to="manageClasses"
+                >
+                  Manage Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "active font-bold text-white" : ""
+                  }
+                  to="manageUsers"
+                >
+                  Manage Users
+                </NavLink>
+              </li>
+            </div>
+          )}
           <div className="divider"></div>
           <div className="text-base font-medium">
             <li>
