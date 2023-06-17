@@ -6,7 +6,7 @@ const PopularClasses = () => {
   const { data: classes = [] } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/classes");
+      const res = await fetch("https://encore-music-server2.vercel.app/classes");
       return res.json();
     },
   });

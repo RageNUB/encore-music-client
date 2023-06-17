@@ -21,88 +21,125 @@ import UpdateClass from "../pages/Dashboard/MyClasses/UpdateClass";
 import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <Main></Main>,
+    children: [
+      {
         path: "/",
-        element: <Main></Main>,
-        children: [
-            {
-                path: "/",
-                element: <Home></Home>
-            },
-            {
-                path: "instructors",
-                element: <AllInstructors></AllInstructors>
-            },
-            {
-                path: "classes",
-                element: <AllClasses></AllClasses>
-            },
-            {
-                path: "login",
-                element: <Login></Login>
-            },
-            {
-                path: "register",
-                element: <Register></Register>
-            }
-        ]
-    },
-    {
-        path: "/dashboard",
-        element: <PrivateRoutes><Dashboard></Dashboard></PrivateRoutes>,
-        children: [
-            {
-                path: "home",
-                element: <PrivateRoutes><DashboardHome></DashboardHome></PrivateRoutes>
-            },
-            {
-                path: "enrolledClasses",
-                element: <PrivateRoutes><EnrolledClasses></EnrolledClasses></PrivateRoutes>
-            },
-            {
-                path: "selectedClasses",
-                element: <PrivateRoutes><SelectedClasses></SelectedClasses></PrivateRoutes>
-            },
-            {
-                path: "selectedClasses/payment/:id",
-                element: <PrivateRoutes><MakePayment></MakePayment></PrivateRoutes>,
-                loader: ({params}) => fetch(`http://localhost:5000/payment/${params.id}`)
-            },
-            {
-                path: "paymentHistory",
-                element: <PrivateRoutes><PaymentHistory></PaymentHistory></PrivateRoutes>
-            },
-            {
-                path: "addClass",
-                element: <AddClass></AddClass>
-            },
-            {
-                path: "myClasses",
-                element: <MyClasses></MyClasses>
-            },
-            {
-                path: "update-class/:id",
-                element: <UpdateClass></UpdateClass>,
-                loader: ({params}) => fetch(`http://localhost:5000/classes/${params.id}`)
-            },
-            {
-                path: "manageClasses",
-                element: <AdminRoute><ManageClasses></ManageClasses></AdminRoute>
-            },
-            {
-                path: "manageUsers",
-                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
-            },
-            {
-                path: "feedback/:id",
-                element: <AdminRoute><Feedback></Feedback></AdminRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/classes/${params.id}`)
-            }
-        ]
-    },
-    {
-        
-    }
+        element: <Home></Home>,
+      },
+      {
+        path: "instructors",
+        element: <AllInstructors></AllInstructors>,
+      },
+      {
+        path: "classes",
+        element: <AllClasses></AllClasses>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "register",
+        element: <Register></Register>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoutes>
+        <Dashboard></Dashboard>
+      </PrivateRoutes>
+    ),
+    children: [
+      {
+        path: "home",
+        element: (
+          <PrivateRoutes>
+            <DashboardHome></DashboardHome>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "enrolledClasses",
+        element: (
+          <PrivateRoutes>
+            <EnrolledClasses></EnrolledClasses>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "selectedClasses",
+        element: (
+          <PrivateRoutes>
+            <SelectedClasses></SelectedClasses>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "selectedClasses/payment/:id",
+        element: (
+          <PrivateRoutes>
+            <MakePayment></MakePayment>
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(`https://encore-music-server2.vercel.app/payment/${params.id}`),
+      },
+      {
+        path: "paymentHistory",
+        element: (
+          <PrivateRoutes>
+            <PaymentHistory></PaymentHistory>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "addClass",
+        element: <AddClass></AddClass>,
+      },
+      {
+        path: "myClasses",
+        element: <MyClasses></MyClasses>,
+      },
+      {
+        path: "update-class/:id",
+        element: <UpdateClass></UpdateClass>,
+        loader: ({ params }) =>
+          fetch(`https://encore-music-server2.vercel.app/classes/${params.id}`),
+      },
+      {
+        path: "manageClasses",
+        element: (
+          <AdminRoute>
+            <ManageClasses></ManageClasses>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageUsers",
+        element: (
+          <AdminRoute>
+            <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "feedback/:id",
+        element: (
+          <AdminRoute>
+            <Feedback></Feedback>
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`https://encore-music-server2.vercel.app/classes/${params.id}`),
+      },
+    ],
+  },
+  {},
 ]);
 
 export default router;

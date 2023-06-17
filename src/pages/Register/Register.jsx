@@ -10,8 +10,8 @@ import { useState } from "react";
 
 const Register = () => {
   const { createUser, googleSignIn, updateUserProfile } = useAuth();
-  const [isShow, setIsShow] = useState(false)
-  const [isShow2, setIsShow2] = useState(false)
+  const [isShow, setIsShow] = useState(false);
+  const [isShow2, setIsShow2] = useState(false);
   const {
     register,
     handleSubmit,
@@ -28,7 +28,7 @@ const Register = () => {
         // const saveUser = {name: data.name, email: data.email, role: "student"}
 
         axios
-          .post("http://localhost:5000/users", {
+          .post("https://encore-music-server2.vercel.app/users", {
             name: data.name,
             image: data.photoURL,
             email: data.email,
@@ -56,7 +56,7 @@ const Register = () => {
       .then((result) => {
         const loggedUser = result.user;
         axios
-          .post("http://localhost:5000/users", {
+          .post("https://encore-music-server2.vercel.app/users", {
             name: loggedUser.displayName,
             image: loggedUser.photoURL,
             email: loggedUser.email,
@@ -79,11 +79,11 @@ const Register = () => {
   };
 
   const toggle = () => {
-    setIsShow(!isShow)
-  }
+    setIsShow(!isShow);
+  };
   const toggle2 = () => {
-    setIsShow2(!isShow2)
-  }
+    setIsShow2(!isShow2);
+  };
 
   return (
     <div className="bg-base-200 min-h-screen pt-12">
@@ -191,28 +191,28 @@ const Register = () => {
                   )}
                 </div>
               </div>
-                <label className="label">
-                  <span className="label-text">Confirm Password</span>
-                </label>
+              <label className="label">
+                <span className="label-text">Confirm Password</span>
+              </label>
               <div className="flex justify-between items-center gap-4">
                 <div className="w-full">
-                <input
-                  type={isShow2 ? "text" : "password"}
-                  placeholder="Confirm Password"
-                  className="input input-bordered"
-                  {...register("confirmPass", {
-                    required: true,
-                    validate: (value) => value === watch("password"),
-                  })}
-                />
-                {errors.confirmPass?.type === "required" && (
-                  <span className="text-red-600">
-                    Confirm Password is required
-                  </span>
-                )}
-                {errors.confirmPass?.type === "validate" && (
-                  <span className="text-red-600">Password not matched</span>
-                )}
+                  <input
+                    type={isShow2 ? "text" : "password"}
+                    placeholder="Confirm Password"
+                    className="input input-bordered"
+                    {...register("confirmPass", {
+                      required: true,
+                      validate: (value) => value === watch("password"),
+                    })}
+                  />
+                  {errors.confirmPass?.type === "required" && (
+                    <span className="text-red-600">
+                      Confirm Password is required
+                    </span>
+                  )}
+                  {errors.confirmPass?.type === "validate" && (
+                    <span className="text-red-600">Password not matched</span>
+                  )}
                 </div>
                 <div onClick={toggle2}>
                   {!isShow2 && (

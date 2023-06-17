@@ -2,25 +2,26 @@ import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 
 const AllInstructors = () => {
-    const { data: instructors = [] } = useQuery({
-        queryKey: ["instructors"],
-        queryFn: async () => {
-          const res = await fetch("http://localhost:5000/instructors");
-          return res.json();
-        },
-      });
+  const { data: instructors = [] } = useQuery({
+    queryKey: ["instructors"],
+    queryFn: async () => {
+      const res = await fetch(
+        "https://encore-music-server2.vercel.app/instructors"
+      );
+      return res.json();
+    },
+  });
 
   return (
     <div className="my-12">
-        <Helmet>
+      <Helmet>
         <title>Encore Music Academy | Instructors</title>
       </Helmet>
       <h1 className="text-4xl font-bold text-center uppercase">
-      Meet Our Esteemed{" "}
-        <span className="text-primary">Instructors</span>
+        Meet Our Esteemed <span className="text-primary">Instructors</span>
       </h1>
       <h3 className="text-lg font-medium text-center mt-3 mb-3">
-      Learn from the industry&apos;s finest and ignite your musical journey
+        Learn from the industry&apos;s finest and ignite your musical journey
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-8 justify-items-center">
         {instructors.map((instructor) => (

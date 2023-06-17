@@ -17,7 +17,9 @@ const AllClasses = () => {
   const { data: classes = [] } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/classes");
+      const res = await fetch(
+        "https://encore-music-server2.vercel.app/classes"
+      );
       return res.json();
     },
   });
@@ -113,7 +115,11 @@ const AllClasses = () => {
               <button
                 onClick={() => handleSelectClass(classData)}
                 className="btn btn-primary mt-5"
-                disabled={userRole !== "student" || classData.total_seats - classData.total_enrolled_students === 0}
+                disabled={
+                  userRole !== "student" ||
+                  classData.total_seats - classData.total_enrolled_students ===
+                    0
+                }
               >
                 Select
               </button>

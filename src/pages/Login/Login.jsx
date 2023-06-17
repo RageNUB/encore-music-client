@@ -47,7 +47,7 @@ const Login = () => {
       .then((result) => {
         const loggedUser = result.user;
         axios
-          .post("http://localhost:5000/users", {
+          .post("https://encore-music-server2.vercel.app/users", {
             name: loggedUser.displayName,
             email: loggedUser.email,
             role: "student",
@@ -69,7 +69,7 @@ const Login = () => {
   };
 
   const toggle = () => {
-    setIsShow(!isShow)
+    setIsShow(!isShow);
   };
 
   return (
