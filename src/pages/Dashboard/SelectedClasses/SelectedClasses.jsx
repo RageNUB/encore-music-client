@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const SelectedClasses = () => {
   const { user } = useAuth();
@@ -65,7 +66,7 @@ const SelectedClasses = () => {
         <div className="overflow-x-auto border-2 rounded-lg">
           <table className="table">
             {/* head */}
-            <thead className="bg-primary border-2 rounded-lg text-sm">
+            <thead className="bg-base-200 rounded-lg text-sm">
               <tr>
                 <th>#</th>
                 <th>Photo</th>
@@ -101,7 +102,7 @@ const SelectedClasses = () => {
                     <button onClick={() => handleDelete(classData._id)} className="btn btn-ghost btn-xs">Delete</button>
                   </th>
                   <th>
-                    <button className="btn btn-ghost btn-xs">Pay</button>
+                    <Link to={`payment/${classData._id}`}><button className="btn btn-ghost btn-xs">Pay</button></Link>
                   </th>
                 </tr>
               ))}

@@ -15,6 +15,7 @@ import AddClass from "../pages/Dashboard/AddClass/AddClass";
 import MyClasses from "../pages/Dashboard/MyClasses/MyClasses";
 import ManageClasses from "../pages/Dashboard/ManageClasses/ManageClasses";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
+import MakePayment from "../pages/Dashboard/MakePayment/MakePayment";
 
 const router = createBrowserRouter([
     {
@@ -60,6 +61,11 @@ const router = createBrowserRouter([
                 element: <PrivateRoutes><SelectedClasses></SelectedClasses></PrivateRoutes>
             },
             {
+                path: "selectedClasses/payment/:id",
+                element: <PrivateRoutes><MakePayment></MakePayment></PrivateRoutes>,
+                loader: ({params}) => fetch(`http://localhost:5000/payment/${params.id}`)
+            },
+            {
                 path: "paymentHistory",
                 element: <PrivateRoutes><PaymentHistory></PaymentHistory></PrivateRoutes>
             },
@@ -80,6 +86,9 @@ const router = createBrowserRouter([
                 element: <ManageUsers></ManageUsers>
             }
         ]
+    },
+    {
+        
     }
 ]);
 
