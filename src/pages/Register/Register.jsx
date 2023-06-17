@@ -1,13 +1,17 @@
 import { useForm } from "react-hook-form";
-import { FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import signupImg from "../../assets/undraw_sign_up_n6im.svg";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
+import { useState } from "react";
 
 const Register = () => {
   const { createUser, googleSignIn, updateUserProfile } = useAuth();
+  const [isShow, setIsShow] = useState(false)
+  const [isShow2, setIsShow2] = useState(false)
   const {
     register,
     handleSubmit,
@@ -17,55 +21,75 @@ const Register = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    createUser(data.email, data.password)
-    .then((result) => {
-        console.log(result);
+    createUser(data.email, data.password).then((result) => {
+      console.log(result);
 
-        updateUserProfile(data.name, data.photoURL)
-        .then(() => {
-          // const saveUser = {name: data.name, email: data.email, role: "student"}
+      updateUserProfile(data.name, data.photoURL).then(() => {
+        // const saveUser = {name: data.name, email: data.email, role: "student"}
 
-          axios.post("http://localhost:5000/users", {name: data.name, image: data.photoURL, email: data.email, role: "student"})
-          .then(data => {
-              console.log(data.data.insertedId)
-              if(data.data.insertedId){
-                Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Account created successfully',
-                  showConfirmButton: false,
-                  timer: 1500
-                })
-                navigate("/");
-              }
+        axios
+          .post("http://localhost:5000/users", {
+            name: data.name,
+            image: data.photoURL,
+            email: data.email,
+            role: "student",
           })
-        })
+          .then((data) => {
+            console.log(data.data.insertedId);
+            if (data.data.insertedId) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Account created successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
+          });
       });
+    });
   };
 
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
         const loggedUser = result.user;
-        axios.post("http://localhost:5000/users", {name: loggedUser.displayName, image: loggedUser.photoURL, email: loggedUser.email, role: "student"})
-          .then(() => {
-                Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Account created successfully',
-                  showConfirmButton: false,
-                  timer: 1500
-                })
-                navigate("/");
+        axios
+          .post("http://localhost:5000/users", {
+            name: loggedUser.displayName,
+            image: loggedUser.photoURL,
+            email: loggedUser.email,
+            role: "student",
           })
+          .then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Account created successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          });
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+  const toggle = () => {
+    setIsShow(!isShow)
+  }
+  const toggle2 = () => {
+    setIsShow2(!isShow2)
+  }
+
   return (
     <div className="bg-base-200 min-h-screen pt-12">
+      <Helmet>
+        <title>Encore Music Academy | Sign Up</title>
+      </Helmet>
       <div className="text-center">
         <h1 className="text-3xl font-bold ">Welcome To Encore Music Academy</h1>
         <h1 className="text-5xl font-bold">Sign Up Now!</h1>
@@ -124,45 +148,62 @@ const Register = () => {
                   <span className="text-red-600">Email is required</span>
                 )}
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="input input-bordered"
-                  {...register("password", {
-                    required: true,
-                    minLength: 6,
-                    pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[a-z])/,
-                  })}
-                />
-                {errors.password?.type === "required" && (
-                  <span className="text-red-600">Password is required</span>
-                )}
-                {errors.password?.type === "minLength" && (
-                  <p className="text-red-600">Password must be 6 characters</p>
-                )}
-                {errors.password?.type === "pattern" && (
-                  <p className="text-red-600">
-                    Password must have one Uppercase one Lowercase and one
-                    special character.
-                  </p>
-                )}
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <div className="flex justify-between items-center gap-4">
+                <div className="w-full">
+                  <input
+                    type={isShow ? "text" : "password"}
+                    placeholder="Password"
+                    className="input input-bordered"
+                    {...register("password", {
+                      required: true,
+                      minLength: 6,
+                      pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[a-z])/,
+                    })}
+                  />
+                  {errors.password?.type === "required" && (
+                    <span className="text-red-600">Password is required</span>
+                  )}
+                  {errors.password?.type === "minLength" && (
+                    <p className="text-red-600">
+                      Password must be 6 characters
+                    </p>
+                  )}
+                  {errors.password?.type === "pattern" && (
+                    <p className="text-red-600">
+                      Password must have one Uppercase one Lowercase and one
+                      special character.
+                    </p>
+                  )}
+                </div>
+                <div onClick={toggle}>
+                  {!isShow && (
+                    <span className="text-xl">
+                      <FaEyeSlash></FaEyeSlash>
+                    </span>
+                  )}
+                  {isShow && (
+                    <span className="text-xl">
+                      <FaEye></FaEye>
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="form-control">
                 <label className="label">
                   <span className="label-text">Confirm Password</span>
                 </label>
+              <div className="flex justify-between items-center gap-4">
+                <div className="w-full">
                 <input
-                  type="password"
+                  type={isShow2 ? "text" : "password"}
                   placeholder="Confirm Password"
                   className="input input-bordered"
-                  {...register("confirmPass", { 
+                  {...register("confirmPass", {
                     required: true,
-                    validate: (value) => value === watch('password')
-                 })}
+                    validate: (value) => value === watch("password"),
+                  })}
                 />
                 {errors.confirmPass?.type === "required" && (
                   <span className="text-red-600">
@@ -172,6 +213,19 @@ const Register = () => {
                 {errors.confirmPass?.type === "validate" && (
                   <span className="text-red-600">Password not matched</span>
                 )}
+                </div>
+                <div onClick={toggle2}>
+                  {!isShow2 && (
+                    <span className="text-xl">
+                      <FaEyeSlash></FaEyeSlash>
+                    </span>
+                  )}
+                  {isShow2 && (
+                    <span className="text-xl">
+                      <FaEye></FaEye>
+                    </span>
+                  )}
+                </div>
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Sign Up</button>

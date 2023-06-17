@@ -3,6 +3,7 @@ import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const ManageClasses = () => {
   const { user } = useAuth();
@@ -53,6 +54,9 @@ const ManageClasses = () => {
 
   return (
     <div className="w-full">
+        <Helmet>
+        <title>Encore Music Academy | Manage Classes</title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center mb-8">Manage Classes</h1>
       <div className="mt-8">
         <div className="overflow-x-auto border-2 rounded-lg">

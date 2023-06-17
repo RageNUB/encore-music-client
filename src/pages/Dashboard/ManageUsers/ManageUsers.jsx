@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const { user } = useAuth();
@@ -32,11 +33,15 @@ const ManageUsers = () => {
       });
   }
 
-  const handleMakeInstructor = id => {
-    const role = {
+  const handleMakeInstructor = user => {
+    const userInfo = {
+        instructor_name: user.name,
+        instructor_email: user.email,
+        instructor_image: user.image,
+        taken_classe: [],
         role: "instructor",
       };
-      axiosSecure.put(`/manageUsers/${id}`, role).then((data) => {
+      axiosSecure.put(`/manageUsers/${user._id}`, userInfo).then((data) => {
         if (data.data.modifiedCount > 0) {
           Swal.fire({
             position: "center",
@@ -52,6 +57,9 @@ const ManageUsers = () => {
 
   return (
     <div className="w-full">
+        <Helmet>
+        <title>Encore Music Academy | Manage Users</title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center mb-8">Manage Users</h1>
       <div className="mt-8">
         <div className="overflow-x-auto border-2 rounded-lg">
@@ -91,14 +99,14 @@ const ManageUsers = () => {
                   <th className="font-medium flex gap-2">
                     <button
                       onClick={() => handleMakeAdmin(userData._id)}
-                      disabled={userData.role === "admin"}
+                      disabled={userData.role !== "student"}
                       className="btn btn-primary btn-sm"
                     >
                       Admin
                     </button>
                     <button
-                      onClick={() => handleMakeInstructor(userData._id)}
-                      disabled={userData.role === "admin"}
+                      onClick={() => handleMakeInstructor(userData)}
+                      disabled={userData.role !== "student"}
                       className="btn btn-primary btn-sm"
                     >
                       Instructor

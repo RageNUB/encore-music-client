@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const AllInstructors = () => {
     const { data: instructors = [] } = useQuery({
@@ -11,6 +12,9 @@ const AllInstructors = () => {
 
   return (
     <div className="my-12">
+        <Helmet>
+        <title>Encore Music Academy | Instructors</title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center uppercase">
       Meet Our Esteemed{" "}
         <span className="text-primary">Instructors</span>

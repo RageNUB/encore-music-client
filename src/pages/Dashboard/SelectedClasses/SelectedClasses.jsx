@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const SelectedClasses = () => {
   const { user } = useAuth();
@@ -61,6 +62,9 @@ const SelectedClasses = () => {
 
   return (
     <div className="w-full">
+        <Helmet>
+        <title>Encore Music Academy | Selected Classes</title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center">My Selected Classes</h1>
       <div className="mt-8">
         <div className="overflow-x-auto border-2 rounded-lg">

@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useUsers from "../../hooks/useUsers";
+import { Helmet } from "react-helmet-async";
 
 const AllClasses = () => {
   const { user } = useAuth();
@@ -63,6 +64,9 @@ const AllClasses = () => {
 
   return (
     <div className="my-12">
+      <Helmet>
+        <title>Encore Music Academy | Classes</title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center uppercase">
         Explore the Most <span className="text-primary">Popular Classes</span>
       </h1>
@@ -109,7 +113,7 @@ const AllClasses = () => {
               <button
                 onClick={() => handleSelectClass(classData)}
                 className="btn btn-primary mt-5"
-                disabled={userRole !== "student"}
+                disabled={userRole !== "student" || classData.total_seats - classData.total_enrolled_students === 0}
               >
                 Select
               </button>

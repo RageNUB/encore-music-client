@@ -17,6 +17,8 @@ import ManageClasses from "../pages/Dashboard/ManageClasses/ManageClasses";
 import ManageUsers from "../pages/Dashboard/ManageUsers/ManageUsers";
 import MakePayment from "../pages/Dashboard/MakePayment/MakePayment";
 import Feedback from "../pages/Dashboard/ManageClasses/Feedback";
+import UpdateClass from "../pages/Dashboard/MyClasses/UpdateClass";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -79,16 +81,21 @@ const router = createBrowserRouter([
                 element: <MyClasses></MyClasses>
             },
             {
+                path: "update-class/:id",
+                element: <UpdateClass></UpdateClass>,
+                loader: ({params}) => fetch(`http://localhost:5000/classes/${params.id}`)
+            },
+            {
                 path: "manageClasses",
-                element: <ManageClasses></ManageClasses>
+                element: <AdminRoute><ManageClasses></ManageClasses></AdminRoute>
             },
             {
                 path: "manageUsers",
-                element: <ManageUsers></ManageUsers>
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             },
             {
                 path: "feedback/:id",
-                element: <Feedback></Feedback>,
+                element: <AdminRoute><Feedback></Feedback></AdminRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/classes/${params.id}`)
             }
         ]

@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const MyClasses = () => {
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
-  const { data: classesData = [], refetch } = useQuery({
+  const { data: classesData = [] } = useQuery({
     queryKey: ["my-classes", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -18,6 +19,9 @@ const MyClasses = () => {
   
   return (
     <div className="w-full">
+        <Helmet>
+        <title>Encore Music Academy | My Classes</title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center mb-8">My Classes</h1>
       <div className="mt-8">
         <div className="overflow-x-auto border-2 rounded-lg">
@@ -56,7 +60,7 @@ const MyClasses = () => {
                   <th className="font-medium">{classData.status}</th>
                   <th className="font-medium">{classData.total_enrolled_students}</th>
                   <th className="font-medium text-xs">{classData.feedback}</th>
-                  <th><button className="btn btn-ghost btn-xs">Update</button></th>
+                  { classData.status !== "denied" && <th><Link to={`/dashboard/update-class/${classData._id}`}><button className="btn btn-ghost btn-xs">Update</button></Link></th>}
                 </tr>
               ))}
             </tbody>

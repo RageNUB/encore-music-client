@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAAHIU--MjfgBW9U8bCmawGA-pKT6DUrKc",
-  authDomain: "encore-music-academy.firebaseapp.com",
-  projectId: "encore-music-academy",
-  storageBucket: "encore-music-academy.appspot.com",
-  messagingSenderId: "936213699131",
-  appId: "1:936213699131:web:fa8f595c9c7e0715b25a1e"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

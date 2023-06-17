@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Feedback = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -32,6 +33,9 @@ const Feedback = () => {
 
   return (
     <div>
+        <Helmet>
+        <title>Encore Music Academy | Feedback</title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center mb-8">
         Send Your Feedback for{" "}
         <span className="text-primary">{loadedData.class_name}</span>

@@ -3,6 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { FaDollarSign, FaUserGraduate } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const MakePayment = () => {
   const loaderdata = useLoaderData();
@@ -12,6 +13,9 @@ const MakePayment = () => {
   const stripePromise = loadStripe(import.meta.env.VITE_Payment_PK_key);
   return (
     <div className="w-full">
+        <Helmet>
+        <title>Encore Music Academy | Payment</title>
+      </Helmet>
       <h1 className="text-4xl font-bold text-center mb-8">
         Make Your Payment for <span className="text-primary">{class_name}</span>
       </h1>

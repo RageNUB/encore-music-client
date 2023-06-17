@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { FaBookReader, FaDollarSign, FaUserGraduate } from "react-icons/fa";
+import { Bounce, Slide, Fade } from "react-awesome-reveal";
 
 const PopularClasses = () => {
   const { data: classes = [] } = useQuery({
@@ -12,15 +13,18 @@ const PopularClasses = () => {
 
   return (
     <div className="my-12">
+      <Bounce>
       <h1 className="text-4xl font-bold text-center uppercase">
         Explore the Most <span className="text-primary">Popular Classes</span>
       </h1>
-      <h3 className="text-lg font-medium text-center mt-3 mb-3">
+      </Bounce>
+      <Slide delay={1} cascade damping={0.1}><h3 className="text-lg font-medium text-center mt-3 mb-3">
         Join our highly sought-after classes and unlock your musical potential
-      </h3>
+      </h3></Slide>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8 mx-auto justify-items-center">
         {classes.slice(0, 6).map((classData) => (
-          <div
+          <Fade key={classData._id}>
+            <div
             key={classData._id}
             className="card card-compact w-96 bg-base-100 shadow-xl mb-8"
           >
@@ -53,6 +57,7 @@ const PopularClasses = () => {
               </p>
             </div>
           </div>
+          </Fade>
         ))}
       </div>
     </div>

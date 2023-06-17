@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { DarkModeToggle } from "react-dark-mode-toggle-2";
-import { FaUserCircle } from "react-icons/fa";
+import { FaBook, FaBookmark, FaClipboardList, FaHome, FaMoneyCheckAlt, FaPlusSquare, FaRegEdit, FaUserCircle, FaUsersCog } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import logo from "../assets/logo.svg";
@@ -126,7 +126,7 @@ const Dashboard = () => {
                   }
                   to="home"
                 >
-                  Dashboard Home
+                 <FaHome></FaHome> Dashboard Home
                 </NavLink>
               </li>
               <li>
@@ -136,7 +136,7 @@ const Dashboard = () => {
                   }
                   to="selectedClasses"
                 >
-                  My Selected Classes
+                 <FaBookmark></FaBookmark> My Selected Classes
                 </NavLink>
               </li>
               <li>
@@ -146,7 +146,7 @@ const Dashboard = () => {
                   }
                   to="enrolledClasses"
                 >
-                  My Enrolled Classes
+                 <FaClipboardList></FaClipboardList> My Enrolled Classes
                 </NavLink>
               </li>
               <li>
@@ -156,7 +156,7 @@ const Dashboard = () => {
                   }
                   to="paymentHistory"
                 >
-                  Payment History
+                 <FaMoneyCheckAlt></FaMoneyCheckAlt> Payment History
                 </NavLink>
               </li>
             </div>
@@ -170,7 +170,7 @@ const Dashboard = () => {
                   }
                   to="home"
                 >
-                  Dashboard Home
+                 <FaHome></FaHome> Dashboard Home
                 </NavLink>
               </li>
               <li>
@@ -180,7 +180,7 @@ const Dashboard = () => {
                   }
                   to="addClass"
                 >
-                  Add A Class
+                  <FaPlusSquare></FaPlusSquare> Add A Class
                 </NavLink>
               </li>
               <li>
@@ -190,7 +190,7 @@ const Dashboard = () => {
                   }
                   to="myClasses"
                 >
-                  My Classes
+                  <FaBook></FaBook> <span>My Classes</span>
                 </NavLink>
               </li>
             </div>
@@ -204,7 +204,7 @@ const Dashboard = () => {
                   }
                   to="home"
                 >
-                  Dashboard Home
+                 <FaHome></FaHome> Dashboard Home
                 </NavLink>
               </li>
               <li>
@@ -214,7 +214,7 @@ const Dashboard = () => {
                   }
                   to="manageClasses"
                 >
-                  Manage Classes
+                 <FaRegEdit></FaRegEdit> Manage Classes
                 </NavLink>
               </li>
               <li>
@@ -224,7 +224,7 @@ const Dashboard = () => {
                   }
                   to="manageUsers"
                 >
-                  Manage Users
+                 <FaUsersCog></FaUsersCog> Manage Users
                 </NavLink>
               </li>
             </div>
